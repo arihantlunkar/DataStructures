@@ -32,7 +32,7 @@ public:
         top = temp;
     }
 
-    void remove()
+    void pop()
     {
         if(!isEmpty())
         {
@@ -70,24 +70,24 @@ public:
 
 int main()
 {
-    Stack* s = new Stack();
+    Stack* stackObj = new Stack();
 
-    s->push(1);
-    s->push(2);
-    s->push(3);
-    s->push(4);
-    s->push(5);
-    s->push(6);
+    stackObj->push(1);
+    stackObj->push(2);
+    stackObj->push(3);
+    stackObj->push(4);
+    stackObj->push(5);
+    stackObj->push(6);
 
-    s->print();
+    stackObj->print();
 
-    s->remove();
+    stackObj->pop();
 
-    s->print();
+    stackObj->print();
 
-    cout << "Peeked value is " << s->peek() << endl;
+    cout << "Peeked value is " << stackObj->peek() << endl;
 
-    delete s;
+    delete stackObj;
     
     return 0;
 }
