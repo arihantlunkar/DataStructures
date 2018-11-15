@@ -24,7 +24,7 @@ public:
         return head->data; // no exception handling
     }
 
-    void push(int d)
+    void enqueue(int d)
     {
         Node* temp = new Node;
         temp->data = d;
@@ -42,7 +42,7 @@ public:
         }
     }
 
-    void remove()
+    void dequeue()
     {
         if(!isEmpty())
         {
@@ -79,24 +79,24 @@ public:
 
 int main()
 {
-    Queue* q = new Queue();
+    Queue* queueObj = new Queue();
 
-    q->push(1);
-    q->push(2);
-    q->push(3);
-    q->push(4);
-    q->push(5);
-    q->push(6);
+    queueObj->enqueue(1);
+    queueObj->enqueue(2);
+    queueObj->enqueue(3);
+    queueObj->enqueue(4);
+    queueObj->enqueue(5);
+    queueObj->enqueue(6);
 
-    q->print();
+    queueObj->print();
 
-    q->remove();
+    queueObj->dequeue();
 
-    q->print();
+    queueObj->print();
 
-    cout << "Peeked value is " << q->peek() << endl;
+    cout << "Peeked value is " << queueObj->peek() << endl;
 
-    delete q;
+    delete queueObj;
 
     return 0;
 }
