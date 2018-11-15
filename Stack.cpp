@@ -5,12 +5,12 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node* next;
+    struct Node* next = nullptr;
 };
 
 class Stack
 {
-    struct Node* top;
+    struct Node* top = nullptr;
 
 public:
 
@@ -21,7 +21,7 @@ public:
 
     int peek() const
     {
-        return top->data; // no exception handling
+        return top->data; // no exception handling done here (top could be nullptr)
     }
 
     void push(int d)
@@ -36,7 +36,6 @@ public:
     {
         if(!isEmpty())
         {
-
             cout << "Removing " << top->data << " from stack" << endl;
 
             Node* temp = top->next;
@@ -88,6 +87,7 @@ int main()
     cout << "Peeked value is " << stackObj->peek() << endl;
 
     delete stackObj;
+    stackObj = nullptr;
     
     return 0;
 }
