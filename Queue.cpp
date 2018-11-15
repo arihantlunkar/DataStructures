@@ -5,12 +5,12 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *next;
+    struct Node *next = nullptr;
 };
 
 class Queue
 {
-    struct Node *head, *tail;
+    struct Node *head  = nullptr, *tail  = nullptr;
 
 public:
 
@@ -21,7 +21,7 @@ public:
 
     int peek() const
     {
-        return head->data; // no exception handling
+        return head->data; // no exception handling done here (head could be nullptr)
     }
 
     void enqueue(int d)
@@ -33,13 +33,12 @@ public:
         if(isEmpty())
         {
             head = temp;
-            tail = temp;
         }
         else
         {
             tail->next = temp;
-            tail = temp;
         }
+        tail = temp;
     }
 
     void dequeue()
@@ -97,6 +96,7 @@ int main()
     cout << "Peeked value is " << queueObj->peek() << endl;
 
     delete queueObj;
+    queueObj = nullptr;
 
     return 0;
 }
