@@ -14,12 +14,12 @@ class Queue
 
 public:
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         return head == nullptr;
     }
 
-    int peek()
+    int peek() const
     {
         return head->data; // no exception handling
     }
@@ -54,7 +54,7 @@ public:
         }
     }
 
-    void print()
+    void print() const
     {
         Node* temp = head;
         while(temp != nullptr)
