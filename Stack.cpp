@@ -14,12 +14,12 @@ class Stack
 
 public:
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         return (top == nullptr);
     }
 
-    int peek()
+    int peek() const
     {
         return top->data; // no exception handling
     }
@@ -45,7 +45,7 @@ public:
         }
     }
 
-    void print()
+    void print() const
     {
         Node* temp = top;
         while(temp != nullptr)
