@@ -281,7 +281,8 @@ int main()
     struct Node * parent = nullptr;
     (void)binaryTreeObj->getParent(binaryTreeObj->getRoot(), 6, parent);
     
-    cout << "Parent of 6 is " << parent->data << endl;
+    if(parent)
+        cout << "Parent of 6 is " << parent->data << endl;
     
     delete binaryTreeObj;
     binaryTreeObj = nullptr;
