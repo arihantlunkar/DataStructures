@@ -46,10 +46,10 @@ public:
                 if(node->right != nullptr)
                 {
                     queueObj.push(node->right);
-                }                
+                }
 
                 cout << "Deleting " << node->data << endl;
-                
+
                 delete node;
                 node = nullptr;
             }
@@ -139,7 +139,7 @@ public:
     void printBFS() const
     {
         if(!isEmpty())
-        {            
+        {
             queue<struct Node*> queueObj;
 
             queueObj.push(root);
@@ -164,32 +164,32 @@ public:
 
         }
     }
-    
+
     bool getParent(struct Node* temp, int key, struct Node* & parent) const
     {
         if(temp == nullptr)
             return false;
-        
+
         if(temp->data == key)
             return true;
-            
+
         if(getParent(temp->left, key, parent) || getParent(temp->right, key, parent))
         {
             parent = temp;
             return false;
-        }   
-        
+        }
+
         return false;
     }
-    
-    void deletion(struct Node* root, int key) 
+
+    void deletion(struct Node* root, int key)
     {
         if(!isEmpty())
         {
             bool isKeyPresent = false;
-            
+
             queue<struct Node*> queueObj;
-            struct Node* node = nullptr; 
+            struct Node* node = nullptr;
             struct Node* keyNode = nullptr;
 
             queueObj.push(root);
@@ -197,7 +197,7 @@ public:
             while(!queueObj.empty())
             {
                 node = queueObj.front();
-                
+
                 if(node->data == key)
                 {
                     keyNode = node;
@@ -215,31 +215,61 @@ public:
                     queueObj.push(node->right);
                 }
             }
-            
+
             if(isKeyPresent)
             {
                 struct Node* parentNode = nullptr;
-                
+
                 (void)getParent(root, node->data /*or key*/, parentNode);
-                
+
                 if(parentNode)
                 {
                     if(parentNode->right && parentNode->right->data == node->data)
-                    {                        
+                    {
                         keyNode->data = parentNode->right->data;
-                        parentNode->right = nullptr;     
+                        parentNode->right = nullptr;
                     }
-                    
+
                     else if(parentNode->left && parentNode->left->data == node->data)
-                    {                        
+                    {
                         keyNode->data = parentNode->left->data;
                         parentNode->left = nullptr;
                     }
                 }
-                
+
                 delete node;
                 node = nullptr;
             }
+        }
+    }
+
+    void convertIntoMirrorTree(struct Node* temp)
+    {
+        if(temp == nullptr)
+            return;
+
+        Node* tmp = temp->left;
+        temp->left = temp->right;
+        temp->right = tmp;
+
+        convertIntoMirrorTree(temp->left);
+        convertIntoMirrorTree(temp->right);
+    }
+
+    void printAllNodesAtHeight(struct Node* temp, int height)
+    {
+        if(temp == NULL)
+            return;
+
+        if( height == 0 )
+        {
+            cout << temp->data << " ";
+            return ;
+        }
+        else
+        {
+            printAllNodesAtHeight( temp->left, height-1 ) ;
+            printAllNodesAtHeight( temp->right, height-1 ) ;
         }
     }
 };
@@ -271,19 +301,29 @@ int main()
     binaryTreeObj->printBFS();
 
     cout << endl;
-    
-    binaryTreeObj->deletion(binaryTreeObj->getRoot(), 2);
-    
+
+    binaryTreeObj->convertIntoMirrorTree(binaryTreeObj->getRoot());
+
     binaryTreeObj->printBFS();
 
     cout << endl;
-    
+
+    binaryTreeObj->printAllNodesAtHeight(binaryTreeObj->getRoot(), 2);
+
+    cout << endl;
+
+    binaryTreeObj->deletion(binaryTreeObj->getRoot(), 2);
+
+    binaryTreeObj->printBFS();
+
+    cout << endl;
+
     struct Node * parent = nullptr;
     (void)binaryTreeObj->getParent(binaryTreeObj->getRoot(), 6, parent);
-    
+
     if(parent)
         cout << "Parent of 6 is " << parent->data << endl;
-    
+
     delete binaryTreeObj;
     binaryTreeObj = nullptr;
 
