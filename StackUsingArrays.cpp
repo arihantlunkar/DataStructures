@@ -13,8 +13,7 @@ public:
 	}
 	~Stack()
 	{
-		delete arr;
-		arr = nullptr;
+		delete[] arr;
 	}
 	void push(int d)
 	{
@@ -22,17 +21,21 @@ public:
 	}
 	void pop()
 	{
+		if(top < 0)
+			throw top;
 		--top;
 	}
 	int peek()
 	{
-		return top < 0 ? -1 : *(arr + top); 
+		if(top < 0)
+			throw top;
+		return *(arr + top); 
 	}
 	bool isEmpty() const
 	{
 		return (top == -1);
 	}
-	void print()
+	void print() const
 	{
 		for(int i = 0; i <= top; ++i)
 		{
@@ -44,16 +47,30 @@ public:
 int main() {
 	// your code goes here
 	Stack stack;
+	try
+	{
+		stack.peek();
+	}
+	catch(...)
+	{
+		printf("Stack is empty\n");		
+	}
 	stack.push(1);
 	stack.push(2);
 	stack.push(3);
 	stack.push(4);
 	stack.push(5);
 	stack.print();
-	printf("Stack top element %d\n",stack.peek());
-	stack.pop();
-	stack.pop();
+	try
+	{
+		printf("Stack top element %d\n",stack.peek());
+		stack.pop();
+		stack.pop();
+	}
+	catch(...)
+	{
+		printf("Stack is empty\n");		
+	}
 	stack.print();
-	printf("Stack top element %d\n",stack.peek());
 	return 0;
 }
